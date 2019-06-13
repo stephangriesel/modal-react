@@ -3,9 +3,12 @@ import '../css/Modal.css';
 
 class Modal extends Component {
     render() {
+        if (this.props.show) {
+            return null;
+        }
         return (
             <div>
-                Hello Modal
+                {this.props.children}
             </div>
         )
     }
