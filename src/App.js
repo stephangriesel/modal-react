@@ -1,37 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Modal from './components/Modal';
 
 class App extends Component {
-  state = {
-    show:false
+  constructor() {
+    super();
+
+    this.state = {
+      isShowing: false
+    }
   }
-  showModal = () => {
+
+  openModalHandler = () => {
     this.setState({
-      ...this.setState,
-      show: !this.state.show
+      isShowing: true
     });
   }
+
+  closeModalHandler = () => {
+    this.setState({
+      isShowing: false
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <React.Fragment>
-        <img 
-        src="https://picsum.photos/id/237/200/300"
-        onClick={this.showModal}
-        />
-        <Modal 
-        show={this.state.show}>
-          Message from modal
+          {this.state.isShowing ? <div onClick={this.closeModalHandler} className="back-drop"></div> : null}
+          <img
+            src="https://picsum.photos/id/237/200/300"
+            className="open-modal-btn"
+            onClick={this.openModalHandler}
+            alt="dog"
+          />
+          <Modal
+            className="modal"
+            show={this.state.isShowing}
+            close={this.closeModalHandler}
+          >
+            Message from modal
         </Modal>
-      
+
         </React.Fragment>
       </div>
     );
 
   }
-  
+
 }
 
 export default App;

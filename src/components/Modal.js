@@ -1,17 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../css/Modal.css';
 
-class Modal extends Component {
-    render() {
-        if (this.props.show) {
-            return null;
-        }
-        return (
-            <div>
-                {this.props.children}
+const Modal = (props) => {
+    return (
+        <div>
+            <div className="modal-wrapper"
+                style={{
+                    transform: props.show ? 'translateY(0vh)' : 'translateY(-200vh)',
+                    opacity: props.show ? '1' : '0'
+                }}>
+                <div className="modal-header">
+                    <h3>Modal Header</h3>
+                    <span className="close-modal-btn" onClick={props.close}>×</span>
+                </div>
+                <div className="modal-body">
+                    <p>
+                        {props.children}
+                    </p>
+                </div>
+                <div className="modal-footer">
+                    <button className="btn-cancel" onClick={props.close}>CLOSE</button>
+                </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
 
 export default Modal;
